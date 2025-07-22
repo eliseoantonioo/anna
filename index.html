@@ -5,14 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Bodhiria Inspired Presentation</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative&display=swap');
-
+        @import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap');
+        
         body {
             margin: 0;
             padding: 0;
             background-color: #0a0a0a;
             color: #ffffff;
-            font-family: 'Cinzel Decorative', cursive;
+            font-family: 'IM Fell English', serif;
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+            font-style: italic;
             overflow: hidden;
             height: 100vh;
             display: flex;
@@ -31,11 +33,9 @@
             text-align: center;
             opacity: 0;
             transition: opacity 1.5s ease-in-out;
-            padding: 2rem;
-            background: rgba(10, 0, 0, 0.7);
-            border: 1px solid #500;
-            box-shadow: 0 0 20px rgba(139, 0, 0, 0.5);
-            border-radius: 5px;
+            padding: 1.5rem;
+            background: transparent;
+            box-shadow: none;
         }
 
         .slide.active {
@@ -45,8 +45,9 @@
         .text {
             font-size: 2rem;
             line-height: 1.6;
-            text-shadow: 0 0 5px rgba(139, 0, 0, 0.7);
+            text-shadow: 0 0 8px rgba(139, 0, 0, 0.8);
             margin: 1.5rem 0;
+            font-weight: 400;
         }
 
         .divider {
@@ -70,8 +71,8 @@
 
         .moon {
             position: absolute;
-            width: 100px;
-            height: 100px;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             background: rgba(255,255,255,0.9);
             background-image: radial-gradient(circle at 30% 30%, #f5f5f5 15%, #e0e0e0 50%, transparent 60%);
@@ -80,7 +81,7 @@
             right: 10%;
             z-index: -1;
             filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.7));
-            animation: moon-glow 8s infinite alternate;
+            animation: moon-glow 6s infinite alternate;
         }
 
         @keyframes moon-glow {
@@ -89,12 +90,13 @@
             100% { box-shadow: 0 0 80px rgba(255, 255, 255, 0.7); }
         }
 
-        .gothic-border {
+        .frame-border {
             position: absolute;
-            width: 90%;
-            height: 90%;
-            border: 2px solid #500;
-            border-image: repeating-linear-gradient(45deg, #500, #500 10px, #300 10px, #300 20px) 10;
+            width: 96%;
+            height: 96%;
+            background: rgba(10, 0, 0, 0.3);
+            border: none;
+            box-shadow: 0 0 0 2px rgba(255,255,255,0.2);
             pointer-events: none;
             z-index: -1;
         }
@@ -138,6 +140,7 @@
 <body>
     <div class="stars"></div>
     <div class="moon"></div>
+    <div class="moon" style="top:85%; left:10%;"></div>
     <div class="gothic-border"></div>
     <div class="crystal" style="top:10%;left:10%;"></div>
     <div class="crystal" style="top:20%;left:85%;transform:rotate(15deg);"></div>
@@ -148,9 +151,11 @@
     <div class="crystal" style="top:25%;left:50%;"></div>
     <div class="crystal" style="top:50%;left:60%;transform:rotate(-15deg);"></div>
     <div class="crystal" style="top:85%;left:40%;"></div>
+    <div class="crystal" style="top:5%;left:30%;"></div>
+    <div class="crystal" style="top:15%;left:90%;"></div>
+    <div class="crystal" style="top:90%;left:10%;"></div>
 
-    <!-- Slide 1 -->
-    <div class="slide active" id="slide1">
+    <div class="slide active">
         <div class="text">A veces los regalos no caben en una caja.</div>
         <div class="text">A veces ni siquiera caben en una fecha.</div>
         <div class="divider"></div>
@@ -216,7 +221,7 @@
 
     <!-- Slide 9 -->
     <div class="slide" id="slide9">
-        <div class="text" style="font-size: 4rem; text-transform: uppercase; letter-spacing: 5px;">Judeline</div>
+        <div class="text" style="font-size: 4rem; letter-spacing: 1px; font-weight: 400;">judeline</div>
         <div class="divider"></div>
     </div>
 
@@ -233,8 +238,7 @@
     <script>
         const slides = document.querySelectorAll('.slide');
         let currentSlide = 0;
-        const transitionTime = 5000; // 5 seconds per slide
-        const totalSlides = 10; // Updated from 9 to 10
+        const transitionTime = 5000;
 
         function showSlide(index) {
             slides.forEach(slide => slide.classList.remove('active'));
@@ -246,14 +250,18 @@
             showSlide(currentSlide);
         }
 
-        // Auto transitions
         setInterval(nextSlide, transitionTime);
-
-        // Click navigation (optional)
         document.body.addEventListener('click', nextSlide);
-
-        // Initial display
         showSlide(0);
+
+        // Intentar reproducir el audio al cargar la página
+        window.addEventListener('DOMContentLoaded', () => {
+            const audio = document.querySelector('audio');
+            audio.volume = 0.6;
+            audio.play().catch(err => {
+                console.warn('El navegador ha bloqueado la reproducción automática:', err);
+            });
+        });
     </script>
 </body>
 </html>
