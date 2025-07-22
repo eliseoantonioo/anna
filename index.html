@@ -139,8 +139,7 @@
         .nav-arrow {
             position: fixed;
             right: 30px;
-            top: 50%;
-            transform: translateY(-50%);
+            bottom: 30px;
             font-size: 40px;
             color: rgba(139, 0, 0, 0.8);
             cursor: pointer;
@@ -151,7 +150,7 @@
         
         .nav-arrow:hover {
             color: rgba(139, 0, 0, 1);
-            transform: translateY(-50%) scale(1.1);
+            transform: scale(1.1);
         }
     </style>
 </head>
@@ -272,8 +271,7 @@
 
         const slides = document.querySelectorAll('.slide');
         let currentSlide = 0;
-        const transitionTime = 5000; // 5 seconds per slide
-        const totalSlides = 10; // Updated from 9 to 10
+        const totalSlides = slides.length;
 
         function showSlide(index) {
             slides.forEach(slide => slide.classList.remove('active'));
@@ -285,35 +283,14 @@
             showSlide(currentSlide);
         }
 
-        let autoplay = false;
-        let slideInterval;
-        
-        function startAutoplay() {
-            if (!autoplay) {
-                slideInterval = setInterval(nextSlide, transitionTime);
-                autoplay = true;
-            }
-        }
-        
-        function stopAutoplay() {
-            clearInterval(slideInterval);
-            autoplay = false;
-        }
+        // Manual navigation button
+        document.getElementById('nextSlideBtn').addEventListener('click', nextSlide);
         
         // Manual navigation button
         document.getElementById('nextSlideBtn').addEventListener('click', nextSlide);
         
-        // Click navigation (optional)
-        document.body.addEventListener('click', () => {
-            stopAutoplay();
-            nextSlide();
-        });
-
         // Initial display
         showSlide(0);
-        
-        // Start with manual control
-        stopAutoplay();
     </script>
 </body>
 </html>
