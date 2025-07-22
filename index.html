@@ -181,24 +181,16 @@
       showSlide(currentSlide);
     }
 
-    // Inicia autoplay visual
+    // Inicia el cambio de diapositivas automáticamente
     setInterval(nextSlide, 5000);
     showSlide(0);
 
-    // Intentar autoplay del audio
-    window.addEventListener("DOMContentLoaded", () => {
-      audio.volume = 0.6;
-      audio.play().catch(() => {
-        // si falla, se activa con primer clic
-      });
-    });
-
-    // Primer clic activa el sonido si no ha empezado
+    // Clic/tap para iniciar el audio
     let audioStarted = false;
     document.body.addEventListener("click", () => {
       nextSlide();
       if (!audioStarted) {
-        audio.play().catch(() => {});
+        audio.play().catch((err) => console.error('No se pudo reproducir el audio: ', err));
         audioStarted = true;
       }
     });
